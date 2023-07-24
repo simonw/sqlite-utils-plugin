@@ -1,0 +1,25 @@
+[project]
+name = "sqlite-utils-{{ cookiecutter.hyphenated }}"
+version = "0.1"
+description = "{{ cookiecutter.description or "" }}"
+readme = "README.md"
+authors = [{name = "{{ cookiecutter.author_name }}"}]
+license = {text = "Apache-2.0"}
+classifiers = [
+    "License :: OSI Approved :: Apache Software License"
+]
+dependencies = [
+    "sqlite-utils"
+]
+{% if cookiecutter.github_username %}
+[project.urls]
+Homepage = "https://github.com/{{ cookiecutter.github_username }}/sqlite-utils-{{ cookiecutter.hyphenated }}"
+Changelog = "https://github.com/{{ cookiecutter.github_username }}/sqlite-utils-{{ cookiecutter.hyphenated }}/releases"
+Issues = "https://github.com/{{ cookiecutter.github_username }}/sqlite-utils-{{ cookiecutter.hyphenated }}/issues"
+CI = "https://github.com/{{ cookiecutter.github_username }}/sqlite-utils-{{ cookiecutter.hyphenated }}/actions"
+{% endif %}
+[project.entry-points.sqlite_utils]
+{{ cookiecutter.underscored }} = "sqlite_utils_{{ cookiecutter.underscored }}"
+
+[project.optional-dependencies]
+test = ["pytest"]

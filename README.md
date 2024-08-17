@@ -65,4 +65,31 @@ You should see the following:
   }
 ]
 ```
-You can run the tests for your plugin with `pytest` - follow the development environment instructions in the plugin's generated README for details.
+You can run the tests for your plugin with `python -m pytest` - follow the development environment instructions in the plugin's generated README for details.
+
+## Publishing your plugin to GitHub
+
+Use https://github.com/new to create a new GitHub repository sharing the same name as your plugin, which should be something like `sqlite-utils-my-new-plugin`.
+
+Push your `main` branch to GitHub like this:
+```bash
+git remote add origin git@github.com:YOURNAME/sqlite-utils-my-new-plugin.git
+git push -u origin main
+```
+The template will have created a GitHub Action which runs your plugin's test suite against every commit.
+
+## Publishing your plugin as a package to PyPI
+
+The template also includes an Action for publishing packages to [PyPI](https://pypi.org/).
+
+For this to work, you need to create an environment in your GitHub repository called `release`. You then need to configure PyPI with a new "pending publisher" with the following settings:
+
+- PyPI Project Name: `sqlite-utils-name-of-your-plugin`
+- Owner: Your GitHub username or organization
+- Repository name: The name of your repository
+- Workflow name: `publish.yml`
+- Environment name: `release`
+
+See [Publish releases to PyPI from GitHub Actions without a password or token](https://til.simonwillison.net/pypi/pypi-releases-from-github) for details.
+
+With that configured, create a GitHub release with a name that corresponds to the version number listed in your `pyproject.toml` file and the action will build and publish a PyPI package for you.
